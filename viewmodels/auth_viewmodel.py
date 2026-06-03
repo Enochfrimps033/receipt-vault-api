@@ -3,4 +3,35 @@ from fastapi import HTTPException, status
 
 from models.user_model import User
 from schemas.user_schema import UserCreate, UserLogin
-from auth import hash_password, verify_password, create_access_token
+from auth import hash_password, verify_password, 
+
+
+class AuthViewModel:
+    def __init__(self, db:Session):
+        self.db = db
+
+    def register_user(self, user_data: UserCreate):
+        existing_user = (
+            self.db.query(User)
+            .filter(User.email == user_data.email)
+            .first()
+        )
+
+        if existing_user:
+            raise HTTPException(
+                status_code = staus.HTTP_400_BAD_REQUEST,
+                detail="Email already registered"
+            
+            )
+
+        new_user = User(
+            email = user_data.email,
+            hash_password = hash_password(user_data.password)
+        )
+        self.db.add(new_user)
+        self.db.commit()
+        self.db.refresh(new_user)
+
+        return new_user
+
+    def login_user(self, login_data: Userlogin):
