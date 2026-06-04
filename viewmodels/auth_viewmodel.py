@@ -34,4 +34,30 @@ class AuthViewModel:
 
         return new_user
 
-    def login_user(self, login_data: Userlogin):
+    def login_user(self, login_data: UserLogin):
+        user = (
+            self.db.query(User)
+            .filter(User.email == login_data.email)
+            .first()
+        )
+
+        if not user:
+             raise HTTPException(
+                status_code = staus.HTTP_401_UNAUTHORIZED,
+                detail="Invalid email or password"
+            
+            )
+        if not verify_password(login_data.password,user.hashed_password):
+            raise HTTPException(
+                 status_code = staus.HTTP_401_UNAUTHORIZED,
+                detail="Invalid email or password"
+            
+            )
+
+            access_token = create_access_token(
+                data = {"sub": user.email}
+            )
+
+            return{ "access_token": access_token,
+             "token_type": "bearer"
+            }
