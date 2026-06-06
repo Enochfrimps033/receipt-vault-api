@@ -14,3 +14,8 @@ router = APIRouter(
 def register(user_data: UserCreate, db: Session = Depends(get_db)):
     auth_vm=AuthViewModel(db)
     return auth_vm.register_user(user_data)
+
+@router.post("/login, response_model=UserResponse")
+def register(login_data: UserLogin, db: Session = Depends(get_db)):
+    auth_vm=AuthViewModel(db)
+    return auth_vm.login_user(login_data)
