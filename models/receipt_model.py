@@ -14,7 +14,7 @@ class Receipt(Base):
     store_name = Column(String, nullable=True)
     amount = Column(Integer, nullable=True)
     date = Column(String, nullable=True)
-    return_windo = Column(String,nullable=True)
+    return_window = Column(String,nullable=True)
     warranty_until = Column(String,  nullable=True)
     warranty_info = Column(String, nullable=True)
     image_url = Column(String, nullable=True)
