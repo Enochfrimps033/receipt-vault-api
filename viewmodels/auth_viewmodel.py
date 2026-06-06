@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 
 from models.user_model import User
 from schemas.user_schema import UserCreate, UserLogin
-from auth import hash_password, verify_password, 
+from auth import hash_password, verify_password
 
 
 class AuthViewModel:

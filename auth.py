@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 
-laod_dotenv()
+load_dotenv()
 
 SECRET_KEY = os.getenv
 ALGORITM = "HS256"#Use the "HS256 sigining algo for JWT tokens
@@ -13,10 +13,10 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 pwd_context = CryptContext(schemes=["bcrypt"],deprecated="auto")
 
-def hashed_password(passsword: str):
-    return pwd.context.hash(password)
+def hash_password(passsword: str):
+    return pwd_context.hash(password)
 
-def verify_passwordp(plain_password:str, hashed_password:str):
+def verify_password(plain_password:str, hashed_password:str):
     return pwd_context.verify(plain_password,hashed_password)
 
 def create_access_token(data: dict):
