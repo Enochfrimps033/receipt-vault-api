@@ -10,12 +10,12 @@ router = APIRouter(
     tags=["Auth"]
 )
 
-@router.post("/register, response_model=UserResponse")
+@router.post("/register", response_model=UserResponse)
 def register(user_data: UserCreate, db: Session = Depends(get_db)):
     auth_vm=AuthViewModel(db)
     return auth_vm.register_user(user_data)
 
-@router.post("/login, response_model=UserResponse")
-def register(login_data: UserLogin, db: Session = Depends(get_db)):
+@router.post("/login", response_model=TokenResponse)
+def login(login_data: UserLogin, db: Session = Depends(get_db)):
     auth_vm=AuthViewModel(db)
     return auth_vm.login_user(login_data)
