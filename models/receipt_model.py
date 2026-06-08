@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, Float, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
 
@@ -12,7 +12,7 @@ class Receipt(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
     store_name = Column(String, nullable=True)
-    amount = Column(Integer, nullable=True)
+    amount = Column(Float, nullable=True)
     date = Column(String, nullable=True)
     return_window = Column(String,nullable=True)
     warranty_until = Column(String,  nullable=True)

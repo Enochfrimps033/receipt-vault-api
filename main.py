@@ -12,7 +12,8 @@ app = FastAPI(title="Receipt Vault API")
 
 app.include_router(users.router)
 app.include_router(receipts.router)
-
+for route in app.routes:
+    print(route.path, route.methods)
 @app.get("/")
 def root():
     return {"message": "Receipt Vault API is running"}
