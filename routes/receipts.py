@@ -20,7 +20,7 @@ def create_receipt(receipt_data:ReceiptCreate, db: Session = Depends(get_db)):
 @router.post("/scan-test")
 async def scan_receipt_test(file: UploadFile = File(...)):
     image_bytes = await file.read()
-
-    result = extract_receipt_data(image_bytes)
+    #passing the image itself and the type of image file)
+    result = extract_receipt_data(image_bytes,file.content_type)
 
     return result
