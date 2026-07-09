@@ -24,3 +24,6 @@ class ReceiptViewModel:
         self.db.refresh(new_receipt)
 
         return new_receipt
+    def get_receipts(self):
+        all_receipts = self.db.query(Receipt).all()
+        return all_receipts

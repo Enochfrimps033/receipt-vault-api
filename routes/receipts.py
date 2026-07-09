@@ -27,3 +27,11 @@ async def scan_receipt(file: UploadFile = File(...), db: Session=Depends(get_db)
     saved_receipt = receipt_vm.create_receipt(receipt_data, user_id=1)
 
     return saved_receipt
+
+@router.get("/", response_model=list[ReceiptResponse])
+def get_all_receipts(db: Session = Depends(get_db)):
+    receipt_vm = ReceiptViewModel(db)
+    all_receipts = receipt_vm.get_receipts()
+
+    return all_receipts
+   
